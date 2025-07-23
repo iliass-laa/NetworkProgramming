@@ -1,0 +1,8 @@
+>> Parse the Config File extract from it :
+    1- from where should i  serve the Static Files;
+    2- how traite the Dynamic content : either CGI or Reverse proxy
+    3- get the Error pages
+
+>> CORE : 
+    1-create the Socket bind it and  start lisening and accepting the request from client.
+    2- get 
