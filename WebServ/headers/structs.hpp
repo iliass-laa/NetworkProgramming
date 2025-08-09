@@ -1,14 +1,10 @@
 # ifndef STRUCTS_HPP
 # define STRUCTS_HPP
 
-#include "webserver.hpp"
+#include "includes.hpp"
 
 
 
-typedef enum methods t_methods;
-typedef struct s_request_header t_request_header;
-typedef struct s_request t_request;
-typedef struct s_response t_response;
 
 
 enum methods{
@@ -18,12 +14,18 @@ enum methods{
     DELETE
 };
 
-enum connectionTypes{
-    GET,
-    POST,
-    UPDATE,
-    DELETE
-};
+typedef struct s_request_header t_request_header;
+typedef struct s_request t_request;
+typedef struct s_response t_response;
+typedef enum methods t_methods;
+
+
+// enum connectionTypes{
+//     GET,
+//     POST,
+//     UPDATE,
+//     DELETE
+// };
 
 struct s_request_header
 {

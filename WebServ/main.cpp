@@ -4,11 +4,21 @@
 
 int main(int ac, char **av)
 {
+    if (ac ==2){   
+        try {
 
-    testSocket();
-    // if (ac == 2)
-    //     std::cout << ">>"<<av[1] <<"<<" << std::endl;
-    (void)ac;
-    (void)av;
+            testSocket(av[1]);
+        }  
+        catch (std::exception &e)
+        {
+            std::cerr << "Caught an Error in the main\n";
+            std::cerr << e.what() << std::endl;
+        }
+    }
+    else    
+    {
+        std::cerr << "Need a config File first!"<< std::endl;
+        return 1;
+    }
     return 0;
 }

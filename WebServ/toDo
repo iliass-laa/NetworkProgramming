@@ -5,4 +5,7 @@
 
 >> CORE : 
     1-create the Socket bind it and  start lisening and accepting the request from client.
-    2- get 
+    2- get the request Parse it then generate the right response to it.
+    3- if it's a static content get it from the path extracted from the config file,                if it's dynamic (CGI , reverse Proxy ... i should figure it out).
+    4- Send the response !
+    

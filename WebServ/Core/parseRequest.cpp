@@ -1,7 +1,7 @@
 #include "../headers/webserver.hpp"
 
 
-int parseRequest(std::string request)
+int parseRequest(std::string request, t_request req)
 {
 
     if (request.length() == 0)
@@ -9,6 +9,7 @@ int parseRequest(std::string request)
     std::cout << "Request Lenght : " << request.length() << "\n"; 
     
     
+    req.requestBody = "Request Body";
     return 0;
 }
 

@@ -1,7 +1,14 @@
 CPP = c++
-CPPFILES = Core/parseRequest.cpp server.cpp main.cpp
+
+
+ParseFiles = configParse/parseConfigFile.cpp \
+			configParse/buildTree.cpp\
+			configParse/utils.cpp\
+			configParse/freeTree.cpp
+CPPFILES = Core/response.cpp Core/parseRequest.cpp\
+			server.cpp main.cpp $(ParseFiles)
 CPPHEADERS = headers/*
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address -g
 OBJ = $(CPPFILES:.cpp=.o)
 NAME = webserv
 

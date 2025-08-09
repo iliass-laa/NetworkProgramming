@@ -1,17 +1,23 @@
 #ifndef WEBSERV_HPP
 #define WEBSERV_HPP
 
-#include <iostream>
-#include <string>
-#include <cstdlib>
-#include <map>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <unistd.h>
-#include <arpa/inet.h>
 
-void testSocket();
-int parseRequest(std::string &request);
+#include "includes.hpp"
+#include "structs.hpp"
+#include "config.hpp"
+#include "classes.hpp"
+#include "AST.hpp"
+
+
+void testSocket(char *path);
+// void parseConfigFile(char *path, ConfigFileInfos &obj);
+void parseConfigFile(char *path);
+int parseRequest(std::string request, t_request req);
 int sendtheRightResponse(int client_fd,  t_request &req);
+// int sendtheRightResponse(int client_fd,t_request req);
+
+BaseNode *buildTree(TokenizerData &tk);
+void printTree(BaseNode * root, int);
+void freeTree(BaseNode *root);
 
 #endif
