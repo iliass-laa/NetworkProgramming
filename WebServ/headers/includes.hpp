@@ -17,6 +17,9 @@
 #include <netinet/in.h>
 #include <unistd.h>
 #include <arpa/inet.h>
+#include <sys/types.h>
+#include <sys/epoll.h>
+#include <dirent.h>
 
 
 #endif

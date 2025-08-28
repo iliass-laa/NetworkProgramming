@@ -18,6 +18,20 @@ public:
     virtual ~ConfigFileError()throw(){};
 };
 
+class RequestError : public std::exception {
+private:
+    std::string msg; 
+public:
+    const char* what() const throw(){  
+        return msg.c_str();
+    }
+    
+    RequestError() : msg("Invalid Request! (Only HTTP1.1 or HTTP1.0)") {}
+    
+    RequestError(const std::string& message) : msg(message) {}
+    virtual ~RequestError()throw(){};
+};
+
 
 class LocationConfig
 {

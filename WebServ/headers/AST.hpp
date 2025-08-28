@@ -44,7 +44,10 @@ class ContextNode :  public BaseNode
 {
 
     public :
-        ContextNode():BaseNode(isContext){};
+        ContextNode():BaseNode(isContext){
+            nbrChildsC = 0;
+            nbrChildsD = 0;
+        };
         ~ContextNode(){};
 
         int type_Context;

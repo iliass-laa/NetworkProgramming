@@ -14,22 +14,27 @@ void printSpaces(int level)
 void    printDirective( DirectiveNode * root,int Level)
 {
     printSpaces(Level);
-    std::cout << root->key <<  "\n";
+    std::cout <<"D_Key :" + root->key +  ":: ";
+    std::cout <<"D_value :";
     for(int i = 0 ; static_cast<size_t>(i) < root->value.size(); i++)
     {
-        printSpaces(Level);
-        std::cout <<"D_value:" + root->value[i]<<  "\n";
+        // printSpaces(Level);
+        std::cout << root->value[i]<<  " ";
     }
+    std::cout<< "\n";
 }
 
 
-void    printTypContextandVal(int type, std::vector <std::string> &val, int level)
+void    printTypContextandVal(int type, std::vector <std::string> &val, int level, int nbrChilds)
 {
     std::string Contexts[6] = {"main", "events","http", "types", "server", "location"};
     for(int i = 0; i < 6;i++)
     {
         if (i==type)
-           std::cout << "typeC:"+ Contexts[i] +  " Level:" <<(level / 3) << " ";
+        {
+            std::cout << "type Of Context:"+ Contexts[i] +  "( Level:" <<(level / 3) << ") ";
+            std::cout << ",Nbr of Childerens : " << nbrChilds << "," ;
+        }
     }
     for(size_t i = 0; i < val.size();i++)
         std::cout << val[i] << " ";
@@ -40,7 +45,7 @@ void    printTypContextandVal(int type, std::vector <std::string> &val, int leve
 void    printfContext(ContextNode *node, int level)
 {
     printSpaces(level);
-    printTypContextandVal(node->type_Context, node->val,level);
+    printTypContextandVal(node->type_Context, node->val,level, node->nbrChildsD + node->nbrChildsC);
     for(size_t i = 0; i < node->Childs.size();i++)
     {
         if (node->Childs[i]->typeNode == isDirective)

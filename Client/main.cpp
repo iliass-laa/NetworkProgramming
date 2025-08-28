@@ -16,7 +16,9 @@ int clientTest(int i)
     char buff[1024];
     int readRet;
     std::string response;
-    std::string msg[2] = {"FIRST MESSAGE !\n", "COLE Palmer , ICE COLDE\n"};
+    std::string msg2 = "POST /login HTTP/1.1\r\nHost: example.com\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: 29\n\nusername=ilaasri&password=1234\n\r";
+    std::string msg[3] = {msg2,"FIRST MESSAGE !\n", "COLE Palmer , ICE COLDE\n"};
+
     if (i >= 2)
         return perror("Index is bigger!\n"),1;
     int socketfd;
@@ -24,7 +26,7 @@ int clientTest(int i)
     memset(&addr, 0, sizeof(addr));
 
     addr.sin_family = AF_INET;
-    addr.sin_port = htons(8080);
+    addr.sin_port = htons(8081);
     addr.sin_addr.s_addr = inet_addr("127.0.0.1");
     socketfd = socket(AF_INET, SOCK_STREAM, 0);
     if (socketfd == -1) 

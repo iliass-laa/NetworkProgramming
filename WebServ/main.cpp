@@ -1,13 +1,13 @@
 #include "headers/webserver.hpp"
 
 
-
 int main(int ac, char **av)
 {
-    if (ac ==2){   
+    BaseNode *root = NULL;
+    if (ac == 2){   
         try {
-
-            testSocket(av[1]);
+            testSocket(av[1], root);
+            freeTree(root);
         }  
         catch (std::exception &e)
         {

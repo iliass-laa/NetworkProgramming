@@ -1,26 +1,29 @@
 #include "../headers/webserver.hpp"
 
 
-int getEndOfContext(TokenizerData &tk, int start, int &nbrChilds,int &nbrD)
+int getEndOfContext(TokenizerData &tk, int start, int &nbrC,int &nbrD)
 {
     int first, nbrBraquets = 0;
     first = start;
     while (static_cast<size_t>(start) < tk.tokens.size())
     {
-        if (!nbrBraquets && tk.tokens[start] == ";")
-            nbrD++;
-        if (tk.tokens[start] == "{" )
+        
+        if (tk.tokens[start].compare("{") == 0 )
         {
+            if (nbrBraquets==1)
+                nbrC++;
             nbrBraquets ++;
-            if (!nbrBraquets)
-                nbrChilds++;
         }
-        else if (tk.tokens[start] == "}")
+        else if (tk.tokens[start].compare("}") == 0)
         {
+            if (!nbrBraquets)
+                throw(ConfigFileError());
+            nbrBraquets --;
             if (!nbrBraquets && first)
                 return start;
-            nbrBraquets --;
         }
+        if (nbrBraquets == 1 && tk.tokens[start] == ";")
+            nbrD++;
         start ++;
     }
     return start;
@@ -52,9 +55,7 @@ void getVal(ContextNode *Node, TokenizerData &tk, int &start, int typeC)
 BaseNode * createDirectiveNode(TokenizerData &tk, int &start){
     
     DirectiveNode *Node;
-
     Node = new DirectiveNode();
-
     Node->key =tk.tokens[start];
     start++;
     while (static_cast<size_t>(start) < tk.tokens.size())
@@ -79,8 +80,9 @@ BaseNode *creatContextNode(TokenizerData &tk, int &start, int typeC)
     if (typeC != MainContext)
         getVal(Node, tk, start, typeC);
     end = getEndOfContext(tk, start, Node->nbrChildsC, Node->nbrChildsD);
-    std::cout << "End of COntext: " << end << "\n";
-    std::cout << "type of COntext: " << typeC << "\n";
+    // std::cout << "type of COntext: " << typeC << "\n";
+    // std::cout << "--->start of COntext: " << start << " ";
+    // std::cout << "End of COntext: " << end << "\n";
     
     if (tk.tokens[start].compare("{") == 0)
         start ++;
@@ -97,8 +99,11 @@ BaseNode *creatContextNode(TokenizerData &tk, int &start, int typeC)
             Node->Childs.push_back(createDirectiveNode(tk, start));
         }
     }
-    if (start < end && tk.tokens[start].compare("}") == 0)
-        start ++;
+    if (static_cast<size_t>(start) <  tk.tokens.size() )
+    {
+        if (tk.tokens[start].compare("}") == 0)
+            start++;
+    }
     return Node;
 }
 

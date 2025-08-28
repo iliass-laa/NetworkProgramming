@@ -14,11 +14,12 @@ void printTokenz(TokenizerData &t)
     std::cout << "SIZE OF the TOKENS :"<<t.tokens.size() << "\n";
     std::cout << "Those are tokens :\n";
     std::vector <std::string> ::iterator it;
-
+    int i = 0;
     it = t.tokens.begin();
     while(it != t.tokens.end())
     {
-        std::cout << ">>"<<*it << "<<";
+        std::cout << i<<"_'" <<*it << "'\n";
+        i++;
         it++;
     }
     std::cout << "Those are braquets remaining  : ";
@@ -182,7 +183,7 @@ void tokenizer(std::fstream &f, TokenizerData &tk)
     }
 }
 
-void parseConfigFile(char *path)
+BaseNode *parseConfigFile(char *path)
 {
     TokenizerData tk;
     std::fstream f(path);
@@ -194,12 +195,10 @@ void parseConfigFile(char *path)
         std::cerr <<"A Brquets left open\n";
         throw(ConfigFileError());
     }
- 
-    printTokenz( tk);
     BaseNode *root;
-
     root = buildTree(tk);
     (void)root;
-    printTree(root, 0);
-    freeTree(root);
+    // printTree(root, 0);
+    // freeTree(root);
+    return root;
 }
