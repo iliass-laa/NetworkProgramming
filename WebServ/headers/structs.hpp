@@ -2,10 +2,16 @@
 # define STRUCTS_HPP
 
 #include "includes.hpp"
+#include "AST.hpp"
 
 
 
-
+enum CgiExtensions
+{
+    php, 
+    py,
+    NONE
+};
 
 enum methods{
     GET,
@@ -45,6 +51,9 @@ struct s_request_header
 
 struct s_request
 {
+    ContextNode *server;
+    ContextNode *location;
+    std::string rootDir;
     t_request_header headers;
     std::string requestBody;
 };

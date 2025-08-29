@@ -24,6 +24,12 @@ void printTree(BaseNode * root, int);
 void freeTree(BaseNode *root);
 
 
+
+DirectiveNode *findDirectiveChild(ContextNode *parent, std::string childName);
+ContextNode *findContextChild(ContextNode *parent, std::string childName);
+
+
+
 /******************CORE:***************** */
 
 
@@ -71,4 +77,13 @@ void    errorHandling(int client_fd,enum errors errn);
 /******************  CGI..:***************** */
 void    handleCGI(int client_fd,t_request &req,BaseNode *root);
 char **getEnv(t_request &req);
+
+
+/******************  CGI>>TOOLS..:***************** */
+
+ContextNode* findRightServer(t_request &req,BaseNode *root);
+ContextNode     *findRightLocation(t_request &req, ContextNode *server);
+void getReqInfos(t_request & req,BaseNode *root);
+
+
 #endif

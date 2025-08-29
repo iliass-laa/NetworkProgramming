@@ -60,3 +60,41 @@ void printTree(BaseNode * root, int Level)
 {
     printfContext(dynamic_cast<ContextNode*>(root), Level);
 }
+
+
+
+
+ContextNode *findContextChild(ContextNode *parent, std::string childName)
+{
+    ContextNode *child;
+    if (parent == NULL)
+        return NULL;
+    for(int i=0 ; i< parent->nbrChildsC+parent->nbrChildsD;i++)
+    {
+        if (parent->Childs[i]->typeNode == isContext)
+        {
+            child = dynamic_cast<ContextNode *>(parent->Childs[i]);
+            if (child->val.at(0).compare(childName) == 0)
+                return child;
+        }
+    }
+    return NULL;
+}
+
+
+DirectiveNode *findDirectiveChild(ContextNode *parent, std::string childName)
+{
+    DirectiveNode *child;
+    if (parent == NULL)
+        return NULL;
+    for(int i=0 ; i< parent->nbrChildsC+parent->nbrChildsD;i++)
+    {
+        if (parent->Childs[i]->typeNode == isDirective)
+        {
+            child = dynamic_cast<DirectiveNode *>(parent->Childs[i]);
+            if (child->key.compare(childName) == 0)
+                return child;
+        }
+    }
+    return NULL;
+}

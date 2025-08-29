@@ -1,35 +1,32 @@
-#include "../../headers/webserver.hpp"
+#include "../../../headers/webserver.hpp"
 
 
-std::string getPath(t_request &req, BaseNode *root)
+
+CgiExtensions checkExtension(std::string path)
 {
-
-    std::string res;
-    res = req.headers.path + root->typeNode; 
-
-    return res;
+    if (path.find_last_of(".py") == path.length() - 3)
+        return py;
+    if (path.find_last_of(".php") == path.length() - 4)
+        return php;
+    return NONE;
 }
 
-int executeProg(t_request &req,BaseNode *root,char **env)
-{
-    int ret;
-    std::string path;
-    path = getPath(req,root);
-    ret = execve(path.c_str(), NULL, env);
-    return ret;
-}
 
-void    handleCGI(int client_fd,t_request &req,BaseNode *root)
+void            handleCGI(int client_fd,t_request &req,BaseNode *root)
 {
-    int pid, res;
-    char **env;
+    CgiExtensions ex;
+    int p[2];
+    int pid;
 
-    env = getEnv(req);
+    ex = checkExtension(req.headers.path);
+    getReqInfos(req, root);
+    pipe(p);
     pid = fork();
-    if (pid ==0)
+    if (pid == 0)
     {
-        res = executeProg(req, root, env);
-    }
-    
-}
 
+    }
+    else{
+
+    }
+}

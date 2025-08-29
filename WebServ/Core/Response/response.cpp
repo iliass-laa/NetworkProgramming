@@ -20,16 +20,16 @@ response_Types get_Res_T(t_request &req)
         return REVERSE_PROXY;
     return STATIC;
 } 
-ContextNode *findServerByHost(t_request &req,BaseNode *root)
-{
-    ContextNode *tmp;
+// ContextNode *findServerByHost(t_request &req,BaseNode *root)
+// {
+//     ContextNode *tmp;
 
-    tmp = findHttpContext(root);
-    if (!tmp)
-        return NULL;
-    tmp = findServerContext(tmp, req.headers.hostname, req.headers.port);
-    return tmp;
-}
+//     tmp = findHttpContext(root);
+//     if (!tmp)
+//         return NULL;
+//     tmp = findServerContext(tmp, req.headers.hostname, req.headers.port);
+//     return tmp;
+// }
 void    handleStatic(int client_fd,t_request &req, BaseNode *root)
 {
    
@@ -70,7 +70,6 @@ void    handleStatic(int client_fd,t_request &req, BaseNode *root)
         }
         else
         {
-            // std::cout <<GREEN<< ">>No index is Founded >>>>\n"<< DEF;
             if (dirListing(location))
                 serveDir(client_fd, dir, req.headers.path);
             else
@@ -98,7 +97,7 @@ int sendtheRightResponse(int client_fd, t_request &req, BaseNode *root)
             // handleReverseProxy(client_fd, req);
             break;
         case CGI:
-            // handleCGI(client_fd, req, root);
+            handleCGI(client_fd, req, root);
             break;
         default:
             handleStatic(client_fd, req, root);

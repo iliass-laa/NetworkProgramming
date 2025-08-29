@@ -117,12 +117,13 @@ void testSocket(char *path, BaseNode *root)
         readed = recv(client_fd,buffer, 1024, MSG_CONFIRM);
         if (readed)
         {
-            core(buffer, client_fd, root);
+            
             std::cout   << "------------------------------------------------------------\n" 
                         << BLUE<<"Client with IP : " <<ip <<" Says :\n" 
                         << buffer 
                         << RED<<"\n------------------------------------------------------------\n"
                         <<DEF;
+            core(buffer, client_fd, root);
         }
         // send (client_fd, response.c_str(), response.length(), MSG_CONFIRM);
         if (client_fd != -1)
