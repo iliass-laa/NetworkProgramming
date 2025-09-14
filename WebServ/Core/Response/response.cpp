@@ -20,19 +20,10 @@ response_Types get_Res_T(t_request &req)
         return REVERSE_PROXY;
     return STATIC;
 } 
-// ContextNode *findServerByHost(t_request &req,BaseNode *root)
-// {
-//     ContextNode *tmp;
 
-//     tmp = findHttpContext(root);
-//     if (!tmp)
-//         return NULL;
-//     tmp = findServerContext(tmp, req.headers.hostname, req.headers.port);
-//     return tmp;
-// }
 void    handleStatic(int client_fd,t_request &req, BaseNode *root)
 {
-   
+
     int lookingForDir;
     ContextNode *location;
     std::string HostName, fullPath, rootPath, fileTarget;
@@ -43,7 +34,10 @@ void    handleStatic(int client_fd,t_request &req, BaseNode *root)
     lookingForDir = 0;
     rootPath = getRootPath(root, req, &location);
     fullPath =  getFullPath(req, rootPath, &lookingForDir, fileTarget);
-    // std::cout << PINK <<"Location Working With :" << location->val.back() << "<\n"<<DEF;
+    getReqInfos(req, root);
+
+
+    std::cout << PINK <<"Location Working With :" << req.location->val.back() << "<\n"<<DEF;
     dir = opendir(fullPath.c_str());
     if (!dir)
     {

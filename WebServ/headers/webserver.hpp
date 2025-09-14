@@ -22,7 +22,7 @@ int sendtheRightResponse(int client_fd,  t_request &req, BaseNode *root);
 BaseNode *buildTree(TokenizerData &tk);
 void printTree(BaseNode * root, int);
 void freeTree(BaseNode *root);
-
+void free_D_Array(char **env);
 
 
 DirectiveNode *findDirectiveChild(ContextNode *parent, std::string childName);
@@ -75,7 +75,7 @@ void    errorHandling(int client_fd,enum errors errn);
 
 
 /******************  CGI..:***************** */
-void    handleCGI(int client_fd,t_request &req,BaseNode *root);
+int    handleCGI(int client_fd,t_request &req,BaseNode *root);
 char **getEnv(t_request &req);
 
 
@@ -84,6 +84,6 @@ char **getEnv(t_request &req);
 ContextNode* findRightServer(t_request &req,BaseNode *root);
 ContextNode     *findRightLocation(t_request &req, ContextNode *server);
 void getReqInfos(t_request & req,BaseNode *root);
-
-
+char *ft_strcopy(const char *s, int size);
+void handleCGIError(t_request &req, int client_fd);
 #endif

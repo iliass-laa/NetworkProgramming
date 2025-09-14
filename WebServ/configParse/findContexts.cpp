@@ -87,9 +87,24 @@ ContextNode *findLocationContext(ContextNode* server, std::string path)
     
     int def = 0;
     tmpRes = NULL;
+    if (!server)
+    {
+        std::cout << RED << "Server is NULL\n"<< DEF;
+        return NULL; 
+    }
+    // std::cout << RED << "Context Type:"<<server->type_Context;
+    // <<" val :"+server->val.back()+"\n"<< DEF;
+    if ( server->type_Context != ServerContext)
+    {
+        std::cout << RED << "Not a Server:"<<server->type_Context<<"\n"<< DEF;
+        return NULL;
+    }
     if (path.compare("/") == 0)
         def = 1; 
-    for(int i = 0; i< server->nbrChildsC + server->nbrChildsD ; i++)
+    int max = server->nbrChildsC + server->nbrChildsD;
+    // std::cout << GREEN <<"\n>>>>>MAX :"<< max <<"<<\n" <<DEF; 
+    // std::cout << GREEN <<">>>>>MAX :"<< server->nbrChildsC + server->nbrChildsD <<"<<\n" <<DEF; 
+    for(int i = 0;  i < max ; i++)
     {
         if (server->Childs[i]->typeNode == isContext)
         {

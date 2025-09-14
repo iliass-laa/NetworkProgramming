@@ -70,7 +70,7 @@ void testSocket(char *path, BaseNode *root)
     char buffer[1024];
     // parseConfigFile(path,cnfInfo);
     root = parseConfigFile(path);
-    std::string response = "HTTP/1.1 200 OK\r\n\r\nHello from webserv!";
+    // std::string response = "HTTP/1.1 200 OK\r\n\r\nHello from webserv!";
     std::string responseMsg = "SERVER SAYS BACK :GOT IT";
     socket_fd = socket(AF_INET, SOCK_STREAM, 0);
     sockaddr_in addr, clientInfo;
@@ -117,7 +117,6 @@ void testSocket(char *path, BaseNode *root)
         readed = recv(client_fd,buffer, 1024, MSG_CONFIRM);
         if (readed)
         {
-            
             std::cout   << "------------------------------------------------------------\n" 
                         << BLUE<<"Client with IP : " <<ip <<" Says :\n" 
                         << buffer 
@@ -135,5 +134,5 @@ void testSocket(char *path, BaseNode *root)
     std::cout << "epoolfd : "<< epollFd << std::endl;
 
 
-    (void)response;
+// /    (void)response;
 }

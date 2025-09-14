@@ -28,3 +28,16 @@ void freeTree(BaseNode *root)
 
 
 
+void free_D_Array(char **env)
+{
+	if (!env)
+		return;
+	int i = 0;
+	while (env[i])
+	{
+		free(env[i]);
+		i++;
+	}
+	free(env);
+}
+

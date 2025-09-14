@@ -27,7 +27,7 @@ char **getEnv(t_request &req)
     char **res;
 
     size = req.headers.additionalHeaders.size();
-    std::cout << "ENV SIZE :" << size <<"\n";
+    // std::cout << "ENV SIZE :" << size <<"\n";
     i = 0;
     if (size == 0)
         return NULL;
@@ -48,7 +48,6 @@ char **getEnv(t_request &req)
         // std::cout << ">>" + line +"| line Size:"<< line.size() << "\n";
         res[i] = ft_strcopy( line.c_str(), line.size());
         // std::cout << ">>"<<res[i] << "| i:"<< i << "\n";
-        
         it++;
         i++;
     }
@@ -93,7 +92,26 @@ ContextNode     *findRightLocation(t_request &req, ContextNode *server)
 
 void getReqInfos(t_request & req,BaseNode *root)
 {
+    req.server = NULL;
+    req.location = NULL;
     req.server = findRightServer(req, root);
-    req.location= findRightLocation(req, req.location);
+    if (req.server != NULL)
+    {
+        req.location= findRightLocation(req, req.server);
+        if (req.location == NULL)
+            std::cout << RED << "NO Location founded \n"<< DEF;
+    }
+    else
+        std::cout << RED << "NO Server founded \n"<< DEF;
 }
     
+
+void handleCGIError(t_request &req, int client_fd){
+
+    std::string errCGI, errHeader;
+    errCGI = "there Was a CGI Error!\n";
+    errHeader = "HTTP/1.1 503 OK\r\n";
+    errCGI = errHeader + errCGI;
+    (void)req;
+    send(client_fd,errCGI.c_str(), errCGI.length(), MSG_CONFIRM);
+}

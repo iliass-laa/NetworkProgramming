@@ -121,9 +121,9 @@ std::string getRootPath(BaseNode *root, t_request req, ContextNode **location)
     if (!tmp)
         return ("No Server Context Found\n");
     rootPathServer = getRootPath(tmp);
-    std::cout << "ROOT PATH SERVER :" << rootPathServer << "<<\n";
+    //std::cout << "ROOT PATH SERVER :" << rootPathServer << "<<\n";
     tmp = findLocationContext(tmp, req.headers.path);
-    std::cout << "Found this Location :" << tmp->val.back() << "\n";
+    //std::cout << "Found this Location :" << tmp->val.back() << "\n";
     if (!tmp)
         return ("NO Location CONTEXT Found\n");
     rootPathLocation = getRootPathFromLocation(tmp);

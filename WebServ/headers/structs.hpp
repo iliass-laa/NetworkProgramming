@@ -8,6 +8,7 @@
 
 enum CgiExtensions
 {
+    bash,
     php, 
     py,
     NONE

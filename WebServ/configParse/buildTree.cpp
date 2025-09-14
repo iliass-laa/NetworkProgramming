@@ -57,6 +57,7 @@ BaseNode * createDirectiveNode(TokenizerData &tk, int &start){
     DirectiveNode *Node;
     Node = new DirectiveNode();
     Node->key =tk.tokens[start];
+    
     start++;
     while (static_cast<size_t>(start) < tk.tokens.size())
     {
