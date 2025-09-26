@@ -86,6 +86,7 @@ void testSocket(char *path, BaseNode *root)
         throw(ConfigFileError("Port Nbr\n"));
     addr.sin_port = htons(8081);
     addr.sin_addr.s_addr = INADDR_ANY;
+    // addr.sin_addr.s_addr = inet_addr("192.168.94.86");
     bind_ret = bind(socket_fd, (sockaddr *)&addr, sizeof(addr) );
     if (bind_ret == -1)
     {

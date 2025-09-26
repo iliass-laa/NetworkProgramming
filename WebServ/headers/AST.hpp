@@ -35,7 +35,6 @@ class DirectiveNode : public BaseNode
 
         DirectiveNode():BaseNode(isDirective){};
         ~DirectiveNode(){};
-
         std::string key;
         std::vector <std::string> value;
 };
@@ -49,7 +48,6 @@ class ContextNode :  public BaseNode
             nbrChildsD = 0;
         };
         ~ContextNode(){};
-
         int type_Context;
         int nbrChildsC;
         int nbrChildsD;
